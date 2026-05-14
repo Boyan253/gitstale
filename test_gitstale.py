@@ -19,3 +19,14 @@ def test_classify_puts_merged_first():
     branches = [("feature/a", NOW, "x")]
     groups = gitstale.classify(branches, {"feature/a"}, "main", 90, now=NOW)
     assert [n for n, _, _ in groups["merged"]] == ["feature/a"]
+
+
+def test_classify_marks_old_branches_stale():
+    branches = [("old", NOW - 200 * DAY, "x")]
+    groups = gitstale.classify(branches, set(), "main", 90, now=NOW)
+    assert [n for n, _, _ in groups["stale"]] == ["old"]
+
+def test_classify_keeps_recent_branches_active():
+    branches = [("fresh", NOW - DAY, "x")]
+    groups = gitstale.classify(branches, set(), "main", 90, now=NOW)
+    assert [n for n, _, _ in groups["active"]] == ["fresh"]
