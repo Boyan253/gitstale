@@ -30,3 +30,9 @@ def test_classify_keeps_recent_branches_active():
     branches = [("fresh", NOW - DAY, "x")]
     groups = gitstale.classify(branches, set(), "main", 90, now=NOW)
     assert [n for n, _, _ in groups["active"]] == ["fresh"]
+
+
+def test_protected_branches_are_skipped():
+    branches = [("main", NOW - 500 * DAY, "x")]
+    groups = gitstale.classify(branches, set(), "main", 90, now=NOW)
+    assert groups["merged"] == [] and groups["stale"] == []
