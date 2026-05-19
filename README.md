@@ -17,3 +17,18 @@ python gitstale.py --days 30                   # stricter staleness
 python gitstale.py --delete-merged --dry-run
 python gitstale.py --delete-merged
 ```
+
+## Output
+
+```
+merged (4)
+  feature/login-rework                 142d  add password reset
+  fix/typo-readme                       98d  fix typo
+stale (2)
+  spike/graphql                        310d  try a schema
+active (3)
+  feature/billing                        4d  wire up webhook
+```
+
+Each line is branch, age of its last commit, and that commit's subject — enough
+to decide without checking anything out.
