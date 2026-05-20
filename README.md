@@ -32,3 +32,12 @@ active (3)
 
 Each line is branch, age of its last commit, and that commit's subject — enough
 to decide without checking anything out.
+
+## Deleting
+
+`--delete-merged` uses `git branch -d`, never `-D`. Git refuses to delete
+anything that is not actually merged, so the worst case is a refusal, not lost
+work. `main`, `master`, `develop`, `release` and the `--base` branch are always
+skipped.
+
+Always run with `--dry-run` first.
