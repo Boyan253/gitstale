@@ -41,3 +41,10 @@ work. `main`, `master`, `develop`, `release` and the `--base` branch are always
 skipped.
 
 Always run with `--dry-run` first.
+
+## Tests
+
+```
+pip install pytest
+pytest
+```
