@@ -6,6 +6,8 @@ import subprocess
 import sys
 import time
 
+__version__ = "0.1.0"
+
 PROTECTED = {"main", "master", "develop", "release", "HEAD"}
 
 
@@ -68,6 +70,8 @@ def classify(branches, merged, base, days, now=None, protected=PROTECTED):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--version", action="version",
+                    version="%(prog)s " + __version__)
     ap.add_argument("-C", "--repo", default=".", help="repository path")
     ap.add_argument("-b", "--base", default="main", help="branch things are merged into")
     ap.add_argument("--days", type=int, default=90, help="a branch is stale after this many days")
